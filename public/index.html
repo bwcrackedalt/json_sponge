@@ -290,8 +290,12 @@ async function createCharacter(data){
 
 async function createNPCS(data){
  const count=Math.min(50,Math.max(0,Number(data.count)||1));
- const models=data.models||data.glbs||[];
+ const models=Array.isArray(data.models)?data.models:
+  Array.isArray(data.glbs)?data.glbs:[];
  if(!models.length)throw new Error("createNPCS needs a models array.");
+ if(models.some(model=>typeof model!=="string"||!model.trim())){
+  throw new Error("Every createNPCS model must be a non-empty GLB URL.");
+ }
 
  for(let i=0;i<count;i++){
   const model=models[Math.floor(Math.random()*models.length)];
@@ -422,7 +426,13 @@ async function executeCommand(command){
  }
 
  if(command.createNPCS){
-  await createNPCS(command.createNPCS);
+  const raw=command.createNPCS;
+  const data=raw&&typeof raw==="object"&&!Array.isArray(raw)?{...raw}:{};
+  if(typeof raw==="number")data.count=raw;
+  data.models=data.models||data.glbs||command.models||command.randomGLBs||command.randomGlbs;
+  if(data.rangePos===undefined)data.rangePos=command.rangePos;
+  if(data.wander===undefined)data.wander=command.wander??command.wanders;
+  await createNPCS(data);
   return;
  }
 

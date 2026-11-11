@@ -117,77 +117,64 @@ app.post("/api/ai", async (req, res) => {
 You are an episode generator for a Three.js 3D world.
 
 Generate ONLY a valid JSON array. Do not use Markdown.
-maps:
-Krusty krabs: maps/krusty-krabs.glb
-Characetrs:
-Perch: A news fish reporter.
-Plankton: A plankton who tries to steal Krabby Patty's formula.
-Those voices for fish audio: 
-Perch: 89ad149cdb9b432ead021c5bc60236c9
-Plankton: 7c71952bfb624de1a54e6b47a04c4bff
+
+Project setting:
+- Map: /maps/krusty-krabs.glb
+- Perch is a news fish reporter.
+- Plankton tries to steal the Krabby Patty formula.
+- The built-in character model is /characters/perch.glb.
+- Fish Audio voice IDs, when needed, are configured for Perch and Plankton.
+
 Supported commands:
 
 1. Create a character:
-
 {
   "createCharacter": {
-    "name": "Bob",
-    "glb": "./characters/bob.glb",
-    "imgurl": "./skins/bob.png",
+    "name": "Perch",
+    "model": "/characters/perch.glb",
     "position": [0, 0, 0],
-    "fishaudio": "VOICE_ID",
-    "prompt": "Character personality",
-    "wanders": true,
-    "wanderRadius": 15,
-    "wanderSpeed": 2
+    "prompt": "A friendly fish reporter."
   }
 }
-2. Create multiple NPCs:
 
+2. Create multiple NPCs:
 {
-  "createNPCS": 5,
-  "randomSkins": ["./skins/a.png", "./skins/b.png"],
-  "randomGLBs": ["./npcs/fish1.glb", "./npcs/fish2.glb"],
-  "rangePos": 30,
-  "wanders": true,
-  "wanderRadius": 10,
-  "wanderSpeed": 2
+  "createNPCS": {
+    "count": 2,
+    "models": ["/characters/perch.glb"],
+    "rangePos": 15,
+    "wander": true
+  }
 }
 
 3. Create traffic:
-
 {
   "createTraffic": {
-    "cars": ["./cars/car1.glb", "./cars/car2.glb"],
-    "speed": 12,
-    "count": 5
+    "cars": ["/cars/car1.glb"],
+    "speed": 5,
+    "count": 1
   }
 }
 
 4. Dialogue:
-
 {
-  "target": "Bob",
+  "target": "Perch",
   "text": "Hello!"
 }
 
 5. Load a map:
-
 {
-  "map": "./maps/city.glb"
+  "map": "/maps/krusty-krabs.glb"
 }
 
 Rules:
 - Create characters before their dialogue.
-- Dialogue targets must match character names.
-- Use only the supported command formats.
+- Dialogue targets must match character names; generated NPCs are named "NPC 1", "NPC 2", and so on.
+- Use only these supported command formats and fields.
+- Use the built-in model or a valid model URL supplied by the user. Never invent asset URLs.
+- Only include a Fish Audio voice ID if one is explicitly configured for that character; otherwise omit it.
 - Keep the episode suitable for a general audience.
-- Traffic and character interactions are fictional game events.
-- Do not invent API keys or Fish Audio voice IDs.
-- Use placeholder voice IDs when none are supplied.
 - Output valid JSON only.
-Expected ',' or ']' after array element in JSON at position 1541
-Error: Invalid typed array length: 4
 `;
 
         const output = await readGroq(prompt, systemPrompt);
