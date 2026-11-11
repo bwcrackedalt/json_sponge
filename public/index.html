@@ -67,34 +67,35 @@ body.json-playing #topbar,body.json-playing #panel,body.json-playing #chat,body.
 <textarea id="episodeJSON">[
   {
     "createCharacter": {
-      "name": "Alex",
-      "model": "https://models.readyplayer.me/65a1f2e3f4.glb",
+      "name": "Perch",
+      "model": "/characters/perch.glb",
       "position": [0, 0, 0],
-      "fishaudio": "INSERT YOUR FISH AUDIO ID",
-      "prompt": "You are Alex, a friendly character."
+      "prompt": "You are Perch, a friendly reporter."
     }
   },
   {
     "createNPCS": {
-      "count": 4,
-      "models": [
-        "https://example.com/character1.glb",
-        "https://example.com/character2.glb"
-      ],
+      "count": 1,
+      "models": ["/characters/perch.glb"],
       "rangePos": 15,
       "wander": true
     }
   },
   {
     "createTraffic": {
-      "cars": [
-        "https://example.com/car1.glb",
-        "https://example.com/car2.glb"
-      ],
+      "cars": ["/cars/car1.glb"],
       "speed": 5,
-      "count": 3
+      "count": 1
     }
-  }
+  },
+  {
+    "target": "Perch",
+    "text": "Hello! Let's take a look around."
+  },
+  {
+    "target": "NPC 1",
+    "text": "Sounds good. I will show you the way."
+    }
 ]</textarea>
 <button id="playJSON" style="width:100%;margin-top:7px">Play JSON</button>
 </section>
@@ -218,7 +219,10 @@ function loadGLB(url){
     }
    });
    resolve(object);
-  },undefined,reject);
+  },undefined,error=>{
+   const reason=error?.message||"The file could not be read.";
+   reject(new Error(`Could not load 3D model "${url}". Check that the URL serves a complete GLB file. ${reason}`));
+  });
  });
 }
 
