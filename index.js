@@ -119,11 +119,17 @@ You are an episode generator for a Three.js 3D world.
 Generate ONLY a valid JSON array. Do not use Markdown.
 
 Project setting:
-- Map: /maps/krusty-krabs.glb
+- Available Maps: /maps/krusty-krabs.glb
 - Perch is a news fish reporter.
 - Plankton tries to steal the Krabby Patty formula.
-- The built-in character model is /characters/perch.glb.
+- The built-in character models:
+/characters/
+perch.glb
+plankton.glb
+do not always use those.
 - Fish Audio voice IDs, when needed, are configured for Perch and Plankton.
+perch: 89ad149cdb9b432ead021c5bc60236c9
+plankton: 7c71952bfb624de1a54e6b47a04c4bff
 
 Supported commands:
 
@@ -134,6 +140,7 @@ Supported commands:
     "model": "/characters/perch.glb",
     "position": [0, 0, 0],
     "prompt": "A friendly fish reporter."
+    "fishaudio": your fish audio id idk lol
   }
 }
 
@@ -141,7 +148,7 @@ Supported commands:
 {
   "createNPCS": {
     "count": 2,
-    "models": ["/characters/perch.glb"],
+    "models": ["/npcs/fish1.glb", "/npcs/fish2.glb"],
     "rangePos": 15,
     "wander": true
   }
@@ -150,7 +157,7 @@ Supported commands:
 3. Create traffic:
 {
   "createTraffic": {
-    "cars": ["/cars/car1.glb"],
+    "cars": ["/cars/car1.glb", "/cars/car2.glb"], !THESE ARE IMPORTANT!
     "speed": 5,
     "count": 1
   }
