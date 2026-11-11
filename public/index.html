@@ -176,7 +176,12 @@ async function init(){
 
  const ground = new THREE.Mesh(
    new THREE.PlaneGeometry(500,500),
-  new THREE.MeshStandardMaterial({color:0x47964b})
+  new THREE.MeshStandardMaterial({
+   color:0x47964b,
+   transparent:true,
+   opacity:0,
+   depthWrite:false
+  })
  );
  ground.rotation.x = -Math.PI/2;
  ground.receiveShadow = true;
@@ -535,6 +540,7 @@ async function playJSON(){
 function updateNPCs(delta){
  for(const npc of npcs){
   if(!npc.object.userData.wander||npc.object.userData.ragdolled)continue;
+  if(npc.object.userData.knockbackVelocity)continue;
 
   const target=npc.object.userData.wanderTarget;
   const dx=target.x-npc.object.position.x;
@@ -558,6 +564,31 @@ function updateCars(delta){
   car.position.z+=car.userData.speed*delta;
   if(car.position.z>car.userData.endZ){
    car.position.z=car.userData.startZ;
+  }
+ }
+}
+
+function applyCharacterBounce(character,direction,force=5){
+ if(character.object.userData.ragdolled)return;
+ const bounceDirection=direction.clone();
+ bounceDirection.y=0;
+ if(bounceDirection.lengthSq()<.0001)bounceDirection.set(1,0,0);
+ bounceDirection.normalize();
+
+ const velocity=character.object.userData.knockbackVelocity||new THREE.Vector3();
+ velocity.addScaledVector(bounceDirection,force).clampLength(0,8);
+ character.object.userData.knockbackVelocity=velocity;
+}
+
+function updateCharacterBounces(delta){
+ for(const character of characters.values()){
+  const velocity=character.object.userData.knockbackVelocity;
+  if(!velocity)continue;
+  character.object.position.x+=velocity.x*delta;
+  character.object.position.z+=velocity.z*delta;
+  velocity.multiplyScalar(Math.exp(-7*delta));
+  if(velocity.lengthSq()<.16){
+   delete character.object.userData.knockbackVelocity;
   }
  }
 }
@@ -644,10 +675,17 @@ function checkCharacterCollisions(){
    const a=list[i],b=list[j];
    if(a.object.userData.ragdolled||b.object.userData.ragdolled)continue;
    const direction=new THREE.Vector3().subVectors(a.object.position,b.object.position);
-   if(direction.lengthSq()>.9*.9)continue;
-   if(direction.lengthSq()<.0001)direction.set(1,0,0);
-   knockCharacterDown(a,direction,5);
-   knockCharacterDown(b,direction.negate(),5);
+   const distanceSquared=direction.lengthSq();
+   if(distanceSquared>.9*.9)continue;
+   const distance=Math.sqrt(distanceSquared);
+   if(distance<.0001)direction.set(1,0,0);
+   else direction.divideScalar(distance);
+
+   const separation=Math.max(0,.9-distance)*.5+.01;
+   a.object.position.addScaledVector(direction,separation);
+   b.object.position.addScaledVector(direction,-separation);
+   applyCharacterBounce(a,direction,4.5);
+   applyCharacterBounce(b,direction.clone().negate(),4.5);
   }
  }
 }
@@ -656,7 +694,8 @@ function animate(){
  requestAnimationFrame(animate);
  const delta=Math.min(clock.getDelta(),.05);
 
- updateNPCs(delta);
+  updateCharacterBounces(delta);
+  updateNPCs(delta);
  updateCars(delta);
   syncStandingBodies();
   world?.step();
