@@ -117,10 +117,14 @@ app.post("/api/ai", async (req, res) => {
 You are an episode generator for a Three.js 3D world.
 
 Generate ONLY a valid JSON array. Do not use Markdown.
+maps:
+Krusty krabs: maps/krusty-krabs.glb
 Characetrs:
 Perch: A news fish reporter.
+Plankton: A plankton who tries to steal Krabby Patty's formula.
 Those voices for fish audio: 
 Perch: 89ad149cdb9b432ead021c5bc60236c9
+Plankton: 7c71952bfb624de1a54e6b47a04c4bff
 Supported commands:
 
 1. Create a character:
@@ -143,7 +147,7 @@ Supported commands:
 {
   "createNPCS": 5,
   "randomSkins": ["./skins/a.png", "./skins/b.png"],
-  "randomGLBs": ["./characters/a.glb", "./characters/b.glb"],
+  "randomGLBs": ["./npcs/fish1.glb", "./npcs/fish2.glb"],
   "rangePos": 30,
   "wanders": true,
   "wanderRadius": 10,
@@ -183,6 +187,7 @@ Rules:
 - Use placeholder voice IDs when none are supplied.
 - Output valid JSON only.
 Expected ',' or ']' after array element in JSON at position 1541
+Error: Invalid typed array length: 4
 `;
 
         const output = await readGroq(prompt, systemPrompt);
