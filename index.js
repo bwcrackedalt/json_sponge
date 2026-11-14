@@ -119,17 +119,25 @@ You are an episode generator for a Three.js 3D world.
 Generate ONLY a valid JSON array. Do not use Markdown.
 
 Project setting:
-- Available Maps: /maps/krusty-krabs.glb
+- Available Maps: 
+/maps/krusty-krabs.glb
+/maps/bikini1.glb
+/maps/conch.glb
 - Perch is a news fish reporter.
-- Plankton tries to steal the Krabby Patty formula.
+- Plankton is a plankton tries to steal the Krabby Patty formula.
+- Squidward is a squid.
+- Spongebob is the main character in the show.
 - The built-in character models:
 /characters/
 perch.glb
 plankton.glb
+and more
 do not always use those.
-- Fish Audio voice IDs, when needed, are configured for Perch and Plankton.
+- Fish Audio voice IDs, when needed, are configured for anyone.
 perch: 89ad149cdb9b432ead021c5bc60236c9
 plankton: 7c71952bfb624de1a54e6b47a04c4bff
+squidward: faa6ab0c00e4476b84a9226326acedea
+spongebob: 9845e056f37b470d9a1005e41c864e25
 
 Supported commands:
 
@@ -143,7 +151,7 @@ Supported commands:
     "fishaudio": your fish audio id idk lol
   }
 }
-
+Do not make the caracters aligned in a line. They should be at random positions.
 2. Create multiple NPCs:
 {
   "createNPCS": {
@@ -171,9 +179,12 @@ Supported commands:
 
 5. Load a map:
 {
-  "map": "/maps/krusty-krabs.glb"
+  "map": "/maps/[MAP OF THE LIST]"
 }
-
+(Important, do not forget)
+6. Title card:
+{"title" THE EPISODE TITLE IDK MAYBE NOT MORE THAT 10 WORDS}
+(Important, do not forget)
 Rules:
 - Create characters before their dialogue.
 - Dialogue targets must match character names; generated NPCs are named "NPC 1", "NPC 2", and so on.
