@@ -12,13 +12,13 @@ the json commands:
     "prompt": "A friendly fish reporter."
     "fishaudio": your fish audio id idk lol
   }
-}`
-creates a character
-name: the name of character
-model: the model (GLB ONLY!!!)
-position: the position of the character
-prompt: pretty useless
-fishaudio: a fish audio voice ID (DO NOT PUT YOUR API KEY!!!)
+}`\
+creates a character\
+name: the name of character\
+model: the model (GLB ONLY!!!)\
+position: the position of the character\
+prompt: pretty useless\
+fishaudio: a fish audio voice ID (DO NOT PUT YOUR API KEY!!!)\
 `{
   "createNPCS": {
     "count": 2,
@@ -26,30 +26,30 @@ fishaudio: a fish audio voice ID (DO NOT PUT YOUR API KEY!!!)
     "rangePos": 15,
     "wander": true
   }
-}`
-creates a variable amount of npcs
-count: the amount you wanna
-models: an array of models
-rangePos: the range to pick
-wander: true/false
+}`\
+creates a variable amount of npcs\
+count: the amount you wanna\
+models: an array of models\
+rangePos: the range to pick\
+wander: true/false\
 `{
   "createTraffic": {
     "cars": ["/cars/car1.glb", "/cars/car2.glb"],
     "speed": 5,
     "count": 1
   }
-}`
-creates a traffic jam
-cars: an array of the cars to add
-speed: the speed of the car (if you put 1000 then it will be barely visible because it's going at the speed of light)
-count: the amount of cars
+}`\
+creates a traffic jam\
+cars: an array of the cars to add\
+speed: the speed of the car (if you put 1000 then it will be barely visible because it's going at the speed of light)○
+count: the amount of cars\
 `{
   "target": "Perch",
   "text": "Hello!"
-}`
-makes the character say something
-target: the target character
-text: the text to say
-`{"title": "Chum falldown"}`
-adds an title card
+}`\
+makes the character say something\
+target: the target character\
+text: the text to say\
+`{"title": "Chum falldown"}`\
+adds an title card\
 (THIS IS IMPORTANT, IF YOU WANT YOUR EPISODE TO BE VISIBLE!)
