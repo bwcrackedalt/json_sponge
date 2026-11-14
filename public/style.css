@@ -47,10 +47,15 @@
       }
       body {
         margin: 0;
-        background: #15131d;
+        background: #00ffff;
+       /*background-image: linear-gradient(to down, #0000ff, #ffffff); /*url("cards/sprite_018.png")*/
+        background-repeat: no-repeat;
+  background-attachment: fixed;
         color: white;
         font-family: Arial, sans-serif;
         overflow: hidden;
+        /*background-size: cover;*/
+        /*background-position: center;*/
       }
       button,
       input,
@@ -58,7 +63,8 @@
         font: inherit;
       }
       button {
-        background: #7654b9;
+        font-family: "krabby";
+        background: #55ada9;
         color: white;
         border: 0;
         padding: 9px 13px;
@@ -66,13 +72,13 @@
         cursor: pointer;
       }
       button:hover {
-        background: #9270d4;
+        background: #55ada0;
       }
       input,
       textarea {
-        background: #211e2b;
+        background: #002e2b;
         color: white;
-        border: 1px solid #494153;
+        border: 1px solid #002e2a;
         padding: 10px;
         border-radius: 5px;
         width: 100%;
@@ -87,13 +93,13 @@
         left: 0;
         right: 0;
         height: 48px;
-        background: #201c2b;
+        background: #005e5b;
         display: flex;
         align-items: center;
         padding: 0 12px;
         gap: 10px;
         z-index: 5;
-        border-bottom: 1px solid #423950;
+        border-bottom: 1px solid #225759;
       }
       #topbar strong {
         margin-right: auto;
@@ -104,8 +110,8 @@
         left: 10px;
         bottom: 10px;
         width: 100vw;
-        background: #201c2bee;
-        border: 1px solid #453b54;
+        background: #007c8aee;
+        border: 1px solid #24403e;
         border-radius: 8px;
         padding: 12px;
         overflow: auto;

@@ -50,6 +50,11 @@ count: the amount of cars\\
 makes the character say something\
 target: the target character\
 text: the text to say\\
+`{
+  "map": "/maps/conch.glb"
+}`\
+changes the map\
+THIS IS IMPORTANT!\\\\\\
 `{"title": "Chum falldown"}`\
 adds an title card\
 (THIS IS IMPORTANT, IF YOU WANT YOUR EPISODE TO BE VISIBLE!)

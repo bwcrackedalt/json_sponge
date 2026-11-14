@@ -508,6 +508,9 @@
           );
         });
       }
+/*async function setSize(character, sizenum){
+  character.scale.setScalar(sizenum);
+}*/
       async function sayAs(character, text) {
         const subtitle = $("subtitle");
         subtitle.textContent = `${character.name}: ${text}`;
