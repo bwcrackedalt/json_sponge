@@ -4,7 +4,7 @@ this is json_sponge that shit is vibecoded so you can ask ai or make your own ep
 the models, the title cards.
 # How do I use it?
 the json commands:
-`{
+``{
   "createCharacter": {
     "name": "Perch",
     "model": "/characters/perch.glb",
@@ -12,5 +12,5 @@ the json commands:
     "prompt": "A friendly fish reporter."
     "fishaudio": your fish audio id idk lol
   }
-}`
+}``
 creates a character
