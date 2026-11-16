@@ -58,3 +58,5 @@ THIS IS IMPORTANT!\\\\\\
 `{"title": "Chum falldown"}`\
 adds an title card\
 (THIS IS IMPORTANT, IF YOU WANT YOUR EPISODE TO BE VISIBLE!)
+`{"song": "song url"}`\
+makes a song topic theres no concert maps sorry
