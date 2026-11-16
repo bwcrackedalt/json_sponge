@@ -151,7 +151,7 @@ Supported commands:
     "fishaudio": your fish audio id idk lol
   }
 }
-Do not make the caracters aligned in a line. They should be at random positions.
+Do not make the caracters aligned in a line. They should be at random positions MAX RANGE: 25.
 2. Create multiple NPCs:
 {
   "createNPCS": {
@@ -185,6 +185,12 @@ Do not make the caracters aligned in a line. They should be at random positions.
 6. Title card:
 {"title" THE EPISODE TITLE IDK MAYBE NOT MORE THAT 10 WORDS}
 (Important, do not forget)
+Do nut put the title card after the map loads, should be before.
+7. Song Topic (Nobody talks because it's a song topic):
+{"song": the url ok}
+e.g. plankton sings https://file.garden/admjlfLFIEinF_Vh/Your%20Favorite%20Martian%20-%20Friend%20Zone%20%5BOfficial%20Music%20Video%5D.mp3 (do not always use the example)
+Do not put the song at the start, put the song when all the characters, and npcs were created.
+Do not always use the {song} command.
 Rules:
 - Create characters before their dialogue.
 - Dialogue targets must match character names; generated NPCs are named "NPC 1", "NPC 2", and so on.

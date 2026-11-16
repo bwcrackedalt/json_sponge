@@ -73,7 +73,7 @@
           0.1,
           500,
         );
-        camera.position.set(0, 5, 12);
+        camera.position.set(0, 10, 19);
 
         renderer = new THREE.WebGLRenderer({ antialias: true });
         renderer.setSize(innerWidth, innerHeight);
@@ -183,14 +183,14 @@
         ctx.fillStyle = "rgba(20,15,30,.8)";
         ctx.fillRect(0, 0, 512, 100);
         ctx.fillStyle = "white";
-        ctx.font = "bold 42px Arial";
+        ctx.font = "bold 24px Arial";
         ctx.textAlign = "center";
         ctx.fillText(name, 256, 65);
         const texture = new THREE.CanvasTexture(canvas);
         const sprite = new THREE.Sprite(
           new THREE.SpriteMaterial({ map: texture, transparent: true }),
         );
-        sprite.scale.set(3, 0.6, 1);
+        sprite.scale.set(6, 1.2, 2);
         sprite.position.y = 10;
         object.add(sprite);
       }
@@ -234,7 +234,7 @@
       }
 
       async function createNPCS(data) {
-        const count = Math.min(500, Math.max(0, Number(data.count) || 1));
+        const count = Math.min(500000000000000, Math.max(0, Number(data.count) || 1));
         const models = Array.isArray(data.models)
           ? data.models
           : Array.isArray(data.glbs)
@@ -368,6 +368,8 @@
             "uh uh balazo",
             "I like numberblocks.",
             "agent smith",
+            "I PEE AND POO ON",
+            "I PEE AND POO ON MELO https://file.garden/admjlfLFIEinF_Vh/15%20sin%20t%C3%ADtulo_20261115111451.png"
           ];
           const character = await createCharacter({
             name: `${names[Math.floor(Math.random() * names.length)]}`,
@@ -420,6 +422,25 @@
         }, 2000);
         //});
       }
+async function songTopic(src) {
+  console.log('Loading:', src); // Check that the full file.garden URL prints here
+
+  return new Promise((resolve, reject) => {
+    const audio = new Audio(src);
+
+    audio.addEventListener('ended', () => {
+      console.log('Audio ended!');
+      resolve();
+    });
+
+    audio.addEventListener('error', () => {
+      reject(new Error(`Audio Error (Code ${audio.error?.code}): Failed to load ${src}`));
+    });
+
+    audio.play().catch(reject);
+  });
+}
+
       async function createTraffic(data) {
         const models = data.cars || [];
         if (!models.length)
@@ -431,7 +452,7 @@
         for (let i = 0; i < count; i++) {
           const model = models[Math.floor(Math.random() * models.length)];
           const car = await loadGLB(model);
-          car.position.set(-50, 0, Math.random() * 15 - 15 / 2);
+          car.position.set(-50, 0, Math.random() * 35 - 35 / 2);
           car.rotation.y = 0;
           car.userData.speed = speed * (0.8 + Math.random() * 0.4);
           car.userData.startX = -50;
@@ -657,6 +678,26 @@
           );
           return;
         }
+        if (command.song) {
+        /*const audio = new Audio(command.song);
+
+audio.addEventListener('ended', () => {
+  console.log('Finished playing!');
+});
+
+audio.addEventListener('error', () => {
+  console.log('Failed to load audio. Error code:', audio.error?.code);
+});
+
+const playPromise = audio.play();
+if (playPromise !== undefined) {
+  playPromise.catch((err) => console.log('Playback blocked:', err));*/
+          await songTopic(command.song);
+          return;
+/*}
+
+          return;*/
+        }
 
         if (command.remove) {
           const character = characters.get(command.remove);
@@ -740,7 +781,7 @@
             continue;
           }
 
-          const speed = 1.5;
+          const speed = 3;
           npc.object.position.x += (dx / distance) * speed * delta;
           npc.object.position.z += (dz / distance) * speed * delta;
           npc.object.rotation.y = Math.atan2(dx, dz);
