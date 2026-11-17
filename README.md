@@ -1,7 +1,7 @@
 # What the hell is this?
 this is json_sponge that shit is vibecoded so you can ask ai or make your own episode with JSON
 # What are the non-vibecoded stuff?
-the models, the title cards.
+the models, the title cards, the song topics, and the `endlessTraffic` command (basically just copied from `createTraffic`)
 # How do I use it?
 the json commands:
 `{
@@ -59,4 +59,9 @@ THIS IS IMPORTANT!\\\\\\
 adds an title card\
 (THIS IS IMPORTANT, IF YOU WANT YOUR EPISODE TO BE VISIBLE!)
 `{"song": "song url"}`\
-makes a song topic theres no concert maps sorry
+makes a song topic theres no concert maps sorry\
+`{"endlessTraffic": {"cars": ["/cars/car1.glb","/cars/car2.glb"],"speed": 10,"count": 10},
+"delay": 1000
+  },`\
+mqkes and endless traffic jam\
+# well thats basically the abomination of it

@@ -191,6 +191,17 @@ Do nut put the title card after the map loads, should be before.
 e.g. plankton sings https://file.garden/admjlfLFIEinF_Vh/Your%20Favorite%20Martian%20-%20Friend%20Zone%20%5BOfficial%20Music%20Video%5D.mp3 (do not always use the example)
 Do not put the song at the start, put the song when all the characters, and npcs were created.
 Do not always use the {song} command.
+Do not always use it except when someone says "sings".
+8. Endless Traffic Jam
+{
+    "endlessTraffic": {
+      "cars": ["/cars/car1.glb", "/cars/car2.glb"],
+      "speed": 10,
+      "count": 10
+    },
+"delay": 1000
+  },
+  Do not always use that.
 Rules:
 - Create characters before their dialogue.
 - Dialogue targets must match character names; generated NPCs are named "NPC 1", "NPC 2", and so on.

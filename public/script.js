@@ -698,6 +698,12 @@ if (playPromise !== undefined) {
 
           return;*/
         }
+        if (command.endlessTraffic && command.delay) {
+          setInterval(function(){
+                  createTraffic(command.endlessTraffic);
+          }, command.delay);
+          return;
+        }
 
         if (command.remove) {
           const character = characters.get(command.remove);
